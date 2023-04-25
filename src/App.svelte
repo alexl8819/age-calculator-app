@@ -58,18 +58,6 @@
     --neutral-white: hsl(0, 0%, 100%);
     --neutral-off-white: hsl(0, 0%, 94%); 
   }
-  
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
 
   .container {
     display: flex;
@@ -86,6 +74,7 @@
     width: 21rem;
     padding: 10px;
     border-radius: 8px;
+    border-bottom-right-radius: 100px;
     background-color: var(--neutral-white);
   }
 </style>

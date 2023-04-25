@@ -11,8 +11,14 @@
 </div>
 
 <style>
-  :root {
-    --purple: hsl(259, 100%, 65%);
+  .results {
+    padding: 10px 15px;
+  }
+
+  .result__years, .result__months, .result__days {
+    font-size: 48px;
+    font-weight: 800;
+    font-style: italic;
   }
   
   .result__years > span, .result__months > span, .result__days > span {
