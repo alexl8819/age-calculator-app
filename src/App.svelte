@@ -1,10 +1,26 @@
 <script>
   import dayjs from 'dayjs';
-  import AgeForm from './lib/AgeForm.svelte';  
-  
-  dayjs.extend(require('dayjs/plugin/customParseFormat'));  
+  import customParseFormat from 'dayjs/plugin/customParseFormat';
 
-  const calculateSince = (date = '1984-09-24', since = dayjs()) {
+  import AgeForm from './lib/AgeForm.svelte';  
+  import AgeResult from './lib/AgeResult.svelte'; 
+ 
+  dayjs.extend(customParseFormat);  
+
+  const handleChange = ({ detail }) => {
+    let calculatedAge;
+    try {
+      calculatedAge = calculateAgeSince(`${detail.year}-${detail.month}-${detail.day}`);
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+    years = calculatedAge.years;
+    months = calculatedAge.months;
+    days = calculatedAge.days;
+  }
+
+  const calculateAgeSince = (date = '1984-09-24', since = dayjs()) => {
     let pastDate = dayjs(date, 'YYYY-MM-DD', true);
 
     if (!pastDate.isValid()) {
@@ -24,16 +40,16 @@
     });
   }
   
-  const year = '';
-  const month = '';
-  const day = '';
+  let years;
+  let months;
+  let days;
 </script>
 
 <div class="container">
   <div class="calculator__container">
     <h1 class="sr-only">Age Calculator</h1>
-    <AgeForm />
-    <AgeResult />
+    <AgeForm on:change={handleChange} />
+    <AgeResult years={years} months={months} days={days} />
   </div>
 </div>
 

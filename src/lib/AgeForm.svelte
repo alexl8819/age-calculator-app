@@ -1,5 +1,9 @@
 <script>
-  const handleKeypress (maxLength) {
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
+  const handleKeypress = (maxLength) => {
     return (e) => {
       if (e.keyCode !== 37 && e.keyCode !== 39 && e.keyCode !== 8 && e.keyCode !== ' ' && e.code.includes('Key')) {
         e.preventDefault();
@@ -8,30 +12,61 @@
       }
     }
   }
+
+  const handleInput = (field) => {
+    return ({ target }) => {
+      if (field === 'year') {
+        year = target.value;
+      } else if (field === 'month') {
+        month = target.value;
+      } else if (field === 'day') {
+        day = target.value;
+      }
+    }
+  }
+
+  const submitDate = () => {
+    dispatch('change', {
+      year,
+      month,
+      day
+    });
+  }
+
+  let year;
+  let month;
+  let day;
 </script>
 
-<form name="ageCalculator" class="calculator__form">
+<form name="ageCalculator" class="calculator__form" on:submit|preventDefault={() => submitDate()}>
   <fieldset class="form__fieldset">
     <legend class="sr-only">Enter age date:</legend>
-      <div>
-        <input type="number" id="day" name="day" class="form__day" min="1" step="1" placeholder="DD" required />
+      <div class="form__field">
+        <input type="number" id="day" name="day" class="form__day" min="1" step="1" placeholder="DD" on:input={handleInput('day')} on:keydown={handleKeypress(2)} required />
         <label for="day" class="form__label">Day</label>
+        <p></p>
       </div>
-      <div>
-        <input type="number" id="month" name="month" class="form__month" min="1" step="1" placeholder="MM" required />
+      <div class="form__field">
+        <input type="number" id="month" name="month" class="form__month" min="1" step="1" placeholder="MM" on:input={handleInput('month')} on:keydown={handleKeypress(2)} required />
         <label for="month" class="form__label">Month</label>
+        <p></p>
       </div>
-      <div>
-        <input type="number" id="year" name="year" class="form__year" min="1000" max="2023" step="1" placeholder="YYYY" required />
+      <div class="form__field">
+        <input type="number" id="year" name="year" class="form__year" min="1000" max="2023" step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} required />
         <label for="year" class="form__label">Year</label>
+        <p></p>
       </div>
  </fieldset>
  <button type="submit" class="form__submit">
-   <img src="./assets/images/icon-arrow.svg" alt="arrow icon" />
+   <img src="../assets/images/icon-arrow.svg" alt="arrow icon" />
  </button>
 </form>
 
 <style>
+  :root {
+    --light-red: hsl(0, 100%, 67%); 
+  }
+
   .calculator__form {
     display: flex;
     flex-direction: column;
@@ -48,7 +83,7 @@
     border: none
   }
 
-  div {
+  .form__field {
     display: flex;
     flex-direction: column-reverse;
     width: 33.33%;
@@ -61,7 +96,7 @@
   }
       
   .form__day:empty, .form__month:empty, .form__year:empty {
-    border: 1px solid red;
+    border: 1px solid var(--light-red);
   }
 
   .form__day, .form__month {
