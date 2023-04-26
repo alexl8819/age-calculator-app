@@ -1,4 +1,6 @@
 :root {
+  --neutral-white: hsl(0, 0%, 100%);
+  --neutral-off-white: hsl(0, 0%, 94%);
   --light-red: hsl(0, 100%, 67%);
   --smokey-grey: hsl(0, 1%, 44%);
   --light-grey: hsl(0, 0%, 86%);

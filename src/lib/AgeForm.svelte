@@ -50,8 +50,17 @@
   const currentYear = new Date().getFullYear();
 
   let year = '';
+  
+  $: isYearEmpty = year.length <= 0;
+
   let month = '';
+
+  $: isMonthEmpty = month.length <= 0;
+
   let day = '';
+
+  $: isDayEmpty = day.length <= 0;
+
   let error = '';
 </script>
 
@@ -59,22 +68,22 @@
   <fieldset class="form__fieldset">
     <legend class="sr-only">Enter age date:</legend>
     <div class="form__field">
-      <input type="number" id="day" name="day" class="field__day" min="1" step="1" placeholder="DD" on:input={handleInput('day')} on:keydown={handleKeypress(2)} required />
+      <p class="field__error">{ isDayEmpty ? 'This field is required' : '' }</p>
+      <input type="number" id="day" name="day" class="field__day" min="1" step="1" placeholder="DD" on:input={handleInput('day')} on:keydown={handleKeypress(2)} />
       <label for="day" class="field__label">Day</label>
-      <p></p>
     </div>
     <div class="form__field">
-      <input type="number" id="month" name="month" class="field__month" min="1" step="1" placeholder="MM" on:input={handleInput('month')} on:keydown={handleKeypress(2)} required />
+      <p class="field__error">{ isMonthEmpty ? 'This field is required' : '' }</p>
+      <input type="number" id="month" name="month" class="field__month" min="1" step="1" placeholder="MM" on:input={handleInput('month')} on:keydown={handleKeypress(2)} />
       <label for="month" class="field__label">Month</label>
-      <p></p>
     </div>
     <div class="form__field">
-      <input type="number" id="year" name="year" class="field__year" min="1000" max="2023" step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} required />
+      <p class="field__error">{ isDayEmpty ? 'This field is required' : '' }</p>
+      <input type="number" id="year" name="year" class="field__year" min="1000" max="2023" step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} />
       <label for="year" class="field__label">Year</label>
-      <p></p>
     </div>
  </fieldset>
- <button type="submit" class="form__submit" disabled={!year.length || !month.length || !day.length}>
+ <button type="submit" class="form__submit" disabled={!isYearEmpty || !isMonthEmpty || !isDayEmpty}>
    <img class="submit__icon" src={ArrowIcon} alt="arrow icon" />
  </button>
 </form>
@@ -93,6 +102,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
+    max-width: 21rem;
     margin-top: 10px;
     margin-bottom: 10px;
     border: none;
@@ -116,9 +126,15 @@
     appearance: textfield;
     padding: 10px;
     border: 1px solid var(--smokey-grey);
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 16px;
     width: 70px;
+  }
+
+  .field__error {
+    visibility: hidden;
+    font-size: 0.6785rem;
+    color: var(--light-red);
   }
 
   .form__field input[type=number]::-webkit-inner-spin-button, 
@@ -142,6 +158,7 @@
     align-self: center;
     border: none;
     width: 56px;
+    margin-top: -35px;
     padding: 15px;
     border-radius: 999px;
     background-color: var(--purple);
@@ -150,5 +167,15 @@
 
   .form__submit:disabled {
     cursor: not-allowed;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .field__day, .field__month, .field__year {
+      width: 85px;
+    }
+
+    .form__submit {
+      align-self: end;
+    }
   }
 </style>

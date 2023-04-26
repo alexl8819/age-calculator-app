@@ -27,5 +27,15 @@
   .result__years > span, .result__months > span, .result__days > span {
     color: var(--purple);
   }
-
+  
+  @media screen and (min-width: 1024px) {
+    .results {
+      margin-top: 20px;
+      padding: 20px 25px;
+    }
+    
+    .result__years, .result__months, .result__days {
+      font-size: 56px;
+    }
+  }
 </style>

@@ -54,11 +54,6 @@
 </div>
 
 <style>
-  :root {
-    --neutral-white: hsl(0, 0%, 100%);
-    --neutral-off-white: hsl(0, 0%, 94%); 
-  }
-
   .container {
     display: flex;
     flex-direction: column;
@@ -76,5 +71,11 @@
     border-radius: 8px;
     border-bottom-right-radius: 100px;
     background-color: var(--neutral-white);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .calculator__container {
+      width: 28rem;
+    }
   }
 </style>
