@@ -12,6 +12,7 @@
 
 <style>
   .results {
+    margin-top: 40px;
     padding: 10px 15px;
   }
 
@@ -19,6 +20,8 @@
     font-size: 48px;
     font-weight: 800;
     font-style: italic;
+    margin-top: -15px;
+    margin-bottom: -15px;
   }
   
   .result__years > span, .result__months > span, .result__days > span {

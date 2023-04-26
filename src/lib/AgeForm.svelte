@@ -27,7 +27,19 @@
     }
   }
 
-  const submitDate = () => {
+  const submitDate = (e) => {
+    const parsedDay = parseInt(day);
+    if (isNaN(parsedDay) || parsedDay < 1 || parsedDay > 31) { // TODO: error
+      return;
+    }
+    const parsedMonth = parseInt(month);
+    if (isNaN(parsedMonth) || parsedMonth < 1 || parsedMonth > 12) { // TODO: error
+      return;
+    }
+    const parsedYear = parseInt(year);
+    if (isNaN(parsedYear) || parsedYear < 1000 || parsedMonth > currentYear) { // TODO: error
+      return;
+    }
     dispatch('change', {
       year,
       month,
@@ -35,12 +47,15 @@
     });
   }
 
+  const currentYear = new Date().getFullYear();
+
   let year = '';
   let month = '';
   let day = '';
+  let error = '';
 </script>
 
-<form name="ageCalculator" class="calculator__form" on:submit|preventDefault={() => submitDate()}>
+<form name="ageCalculator" class="calculator__form" on:submit|preventDefault={(e) => submitDate()} novalidate>
   <fieldset class="form__fieldset">
     <legend class="sr-only">Enter age date:</legend>
     <div class="form__field">
@@ -110,20 +125,24 @@
   .form__field input[type=number]::-webkit-outer-spin-button,
   .form__field input[type=number] { 
     -webkit-appearance: none;
-    -moz-appearance: textfield; 
+    appearance: textfield; 
     margin: 0;
   }
       
-  /*.form__day:empty, .form__month:empty, .form__year:empty {
+  .form__field input[type=number]:invalid {
     border: 1px solid var(--light-red);
-  }*/
+  }
+
+  .form__field input[type=number]:invalid + .field__label {
+    color: var(--light-red);
+  }
 
   .form__submit {
     display: flex;
     align-self: center;
     border: none;
     width: 56px;
-    padding: 10px;
+    padding: 15px;
     border-radius: 999px;
     background-color: var(--purple);
     cursor: pointer;
