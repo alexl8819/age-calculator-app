@@ -83,7 +83,7 @@
       <label for="year" class="field__label">Year</label>
     </div>
  </fieldset>
- <button type="submit" class="form__submit" disabled={!isYearEmpty || !isMonthEmpty || !isDayEmpty}>
+ <button type="submit" class="form__submit">
    <img class="submit__icon" src={ArrowIcon} alt="arrow icon" />
  </button>
 </form>
@@ -135,6 +135,7 @@
     visibility: hidden;
     font-size: 0.6785rem;
     color: var(--light-red);
+    min-height: 15px;
   }
 
   .form__field input[type=number]::-webkit-inner-spin-button, 
