@@ -78,7 +78,7 @@
       <label for="month" class="field__label">Month</label>
     </div>
     <div class="form__field">
-      <p class="field__error">{ isDayEmpty ? 'This field is required' : '' }</p>
+      <p class="field__error">{ isYearEmpty ? 'This field is required' : '' }</p>
       <input type="number" id="year" name="year" class="field__year" min="1000" max="2023" step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} />
       <label for="year" class="field__label">Year</label>
     </div>
@@ -102,9 +102,9 @@
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
-    max-width: 21rem;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-bottom: 25px;
     border: none;
   }
 
@@ -129,13 +129,17 @@
     border-radius: 5px;
     font-size: 16px;
     width: 70px;
+    outline: none;
   }
 
   .field__error {
-    visibility: hidden;
-    font-size: 0.6785rem;
+    visibility: visible;
+    font-size: 0.5585rem;
+    font-weight: 400;
     color: var(--light-red);
-    min-height: 15px;
+    font-style: italic;
+    height: 15px;
+    margin-top: 2px;
   }
 
   .form__field input[type=number]::-webkit-inner-spin-button, 
@@ -158,8 +162,8 @@
     display: flex;
     align-self: center;
     border: none;
-    width: 56px;
-    margin-top: -35px;
+    width: 86px;
+    margin-top: -30px;
     padding: 15px;
     border-radius: 999px;
     background-color: var(--purple);
@@ -171,8 +175,12 @@
   }
 
   @media screen and (min-width: 1024px) {
+    .form__fieldset {
+      max-width: 22rem;
+    }
+
     .field__day, .field__month, .field__year {
-      width: 85px;
+      width: 90px;
     }
 
     .form__submit {

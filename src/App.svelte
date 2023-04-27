@@ -68,14 +68,15 @@
   .calculator__container {
     width: 21rem;
     padding: 10px;
+    padding-bottom: 25px;
     border-radius: 8px;
-    border-bottom-right-radius: 100px;
+    border-bottom-right-radius: 150px;
     background-color: var(--neutral-white);
   }
 
   @media screen and (min-width: 1024px) {
     .calculator__container {
-      width: 28rem;
+      width: 52rem;
     }
   }
 </style>

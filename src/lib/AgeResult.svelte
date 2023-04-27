@@ -35,7 +35,9 @@
     }
     
     .result__years, .result__months, .result__days {
-      font-size: 56px;
+      font-size: 96px;
+      margin-top: -25px;
+      margin-bottom: -25px;
     }
   }
 </style>
