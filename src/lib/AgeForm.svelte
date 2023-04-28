@@ -162,7 +162,7 @@
     display: flex;
     align-self: center;
     border: none;
-    width: 86px;
+    width: 56px;
     margin-top: -30px;
     padding: 15px;
     border-radius: 999px;
@@ -185,6 +185,8 @@
 
     .form__submit {
       align-self: end;
+      width: 76px;
+      padding: 20px;
     }
   }
 </style>

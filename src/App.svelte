@@ -69,14 +69,14 @@
     width: 21rem;
     padding: 10px;
     padding-bottom: 25px;
-    border-radius: 8px;
-    border-bottom-right-radius: 150px;
+    border-radius: 15px;
+    border-bottom-right-radius: 175px;
     background-color: var(--neutral-white);
   }
 
   @media screen and (min-width: 1024px) {
     .calculator__container {
-      width: 52rem;
+      width: 54rem;
     }
   }
 </style>

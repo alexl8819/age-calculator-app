@@ -20,6 +20,7 @@
     font-size: 48px;
     font-weight: 800;
     font-style: italic;
+    letter-spacing: 0.015em;
     margin-top: -15px;
     margin-bottom: -15px;
   }
