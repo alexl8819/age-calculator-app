@@ -92,7 +92,7 @@
   .calculator__form {
     display: flex;
     flex-direction: column;
-    height: 130px;
+    height: 150px;
     margin: 15px;
     border-bottom: 1px solid var(--light-grey);
   }
@@ -115,8 +115,9 @@
   }
 
   .field__label {
-    letter-spacing: 0.2em;
+    letter-spacing: 0.425em;
     font-size: 0.75rem;
+    font-weight: 700;
     color: var(--smokey-grey);
     text-transform: uppercase;
     margin-bottom: 2px;
@@ -128,6 +129,7 @@
     border: 1px solid var(--smokey-grey);
     border-radius: 5px;
     font-size: 16px;
+    font-weight: 700;
     width: 70px;
     outline: none;
   }
@@ -175,18 +177,31 @@
   }
 
   @media screen and (min-width: 1024px) {
+    .calculator__form {
+      margin: 10px;
+    }
+
     .form__fieldset {
-      max-width: 22rem;
+      max-width: 38rem;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     .field__day, .field__month, .field__year {
-      width: 90px;
+      width: 155px;
+      padding: 15px 20px;
+      font-size: 28px;
+    }
+
+    .field__error {
+      margin-top: 5px;
+      font-size: 0.875rem;
     }
 
     .form__submit {
       align-self: end;
-      width: 76px;
-      padding: 20px;
+      width: 96px;
+      padding: 25px;
     }
   }
 </style>

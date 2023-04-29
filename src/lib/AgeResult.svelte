@@ -5,9 +5,9 @@
 </script>
 
 <div class="results">
-  <p class="result__years"><span>{ years }</span> years</p>
-  <p class="result__months"><span>{ months }</span> months</p>
-  <p class="result__days"><span>{ days }</span> days</p>
+  <p class="result__years"><span>{ years }</span>years</p>
+  <p class="result__months"><span>{ months }</span>months</p>
+  <p class="result__days"><span>{ days }</span>days</p>
 </div>
 
 <style>
@@ -20,25 +20,26 @@
     font-size: 48px;
     font-weight: 800;
     font-style: italic;
-    letter-spacing: 0.015em;
+    letter-spacing: 0.01em;
     margin-top: -15px;
     margin-bottom: -15px;
   }
   
   .result__years > span, .result__months > span, .result__days > span {
     color: var(--purple);
+    letter-spacing: 0.2em;
   }
   
   @media screen and (min-width: 1024px) {
     .results {
-      margin-top: 20px;
-      padding: 20px 25px;
+      margin-top: 0;
+      padding: 20px 28px;
     }
     
     .result__years, .result__months, .result__days {
       font-size: 96px;
-      margin-top: -25px;
-      margin-bottom: -25px;
+      margin-top: -28px;
+      margin-bottom: -28px;
     }
   }
 </style>
