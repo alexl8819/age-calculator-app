@@ -66,11 +66,11 @@
   }
 
   .calculator__container {
-    width: 21rem;
+    width: 21.5rem;
     padding: 10px;
     padding-bottom: 25px;
     border-radius: 18px;
-    border-bottom-right-radius: 175px;
+    border-bottom-right-radius: 100px;
     background-color: var(--neutral-white);
   }
 
@@ -78,6 +78,7 @@
     .calculator__container {
       width: 52rem;
       padding: 30px;
+      border-bottom-right-radius: 175px;
     }
   }
 </style>

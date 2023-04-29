@@ -189,7 +189,7 @@
 
     .field__day, .field__month, .field__year {
       width: 155px;
-      padding: 15px 20px;
+      padding: 13px 20px;
       font-size: 28px;
     }
 
