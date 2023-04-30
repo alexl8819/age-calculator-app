@@ -1,9 +1,13 @@
 <script>
+  import dayjs from 'dayjs';
+  import customParseFormat from 'dayjs/plugin/customParseFormat';
   import { createEventDispatcher } from 'svelte';
 
   import ArrowIcon from '../assets/images/icon-arrow.svg';
-
+  
   const dispatch = createEventDispatcher();
+  
+  dayjs.extend(customParseFormat);
 
   const handleKeypress = (maxLength) => {
     return (e) => {
@@ -28,22 +32,40 @@
   }
 
   const submitDate = (e) => {
-    const parsedDay = parseInt(day);
-    if (isNaN(parsedDay) || parsedDay < 1 || parsedDay > 31) { // TODO: error
+    submitted = true;
+    let calculatedAge;
+    try {
+      calculatedAge = calculateAgeSince(`${year}-${month}-${day}`);
+    } catch (err) {
+      console.log(err);
+      invalidDate = true;
       return;
     }
-    const parsedMonth = parseInt(month);
-    if (isNaN(parsedMonth) || parsedMonth < 1 || parsedMonth > 12) { // TODO: error
-      return;
-    }
-    const parsedYear = parseInt(year);
-    if (isNaN(parsedYear) || parsedYear < 1000 || parsedMonth > currentYear) { // TODO: error
-      return;
-    }
+    invalidDate = false;
     dispatch('change', {
-      year,
-      month,
-      day
+      years: calculatedAge.years,
+      months: calculatedAge.months,
+      days: calculatedAge.days
+    });
+  }
+
+  const calculateAgeSince = (date = '1984-09-24', since = dayjs()) => {
+    let pastDate = dayjs(date, 'YYYY-MM-DD', true);
+
+    if (!pastDate.isValid()) {
+      throw new Error('Failed strict date check: Date is invalid or format is wrong');
+    }
+
+    const yearsSince = since.diff(pastDate, 'years');
+    pastDate = pastDate.add(yearsSince, 'year');
+    const monthsSince = since.diff(pastDate, 'month');
+    pastDate = pastDate.add(monthsSince, 'month');
+    const daysSince = since.diff(pastDate, 'day');
+
+    return Object.freeze({
+      years: yearsSince,
+      months: monthsSince,
+      days: daysSince
     });
   }
 
@@ -51,41 +73,50 @@
 
   let year = '';
   
-  $: isYearEmpty = year.length <= 0;
+  $: isYearEmpty = year.length === 0 || /\s+/g.test(year);
+  $: isValidYear = parseInt(year) >= 1000 && parseInt(year) <= currentYear;
+  $: yearErrorMessage = isYearEmpty ? 'This field is required' : (!isValidYear ? 'Must be a valid year' : '');
 
   let month = '';
 
-  $: isMonthEmpty = month.length <= 0;
+  $: isMonthEmpty = month.length === 0 || /\s+/g.test(month);
+  $: isValidMonth = parseInt(month) >= 1 && parseInt(month) <= 12;
+  $: monthErrorMessage = isMonthEmpty ? 'This field is required' : (!isValidMonth ? 'Must be a valid month' : '');
 
   let day = '';
 
-  $: isDayEmpty = day.length <= 0;
+  $: isDayEmpty = day.length === 0 || /\s+/g.test(day);
+  $: isValidDay = parseInt(day) >= 1 && parseInt(day) <= 31;
+  $: dayErrorMessage = isDayEmpty ? 'This field is required' : (!isValidDay ? 'Must be a valid day' : '');
 
-  let error = '';
+  let submitted = false;
+  let invalidDate = false;
+  
+  $: invalidErrorMessage = isValidYear && isValidMonth && isValidDay && invalidDate ? 'Must be a valid date' : '';
 </script>
 
-<form name="ageCalculator" class="calculator__form" on:submit|preventDefault={(e) => submitDate()} novalidate>
+<form name="ageCalculator" class="calculator__form" on:submit|preventDefault={submitDate} noValidate>
   <fieldset class="form__fieldset">
     <legend class="sr-only">Enter age date:</legend>
     <div class="form__field">
-      <p class="field__error">{ isDayEmpty ? 'This field is required' : '' }</p>
-      <input type="number" id="day" name="day" class="field__day" min="1" step="1" placeholder="DD" on:input={handleInput('day')} on:keydown={handleKeypress(2)} />
+      <p class="field__error">{ submitted ? (dayErrorMessage || invalidErrorMessage) : '' }</p>
+      <input type="number" id="day" name="day" class={ submitted && (invalidDate || isDayEmpty || !isValidDay) ? 'field__day error' : 'field__day' } min="1" step="1" placeholder="DD" on:input={handleInput('day')} on:keydown={handleKeypress(2)} />
       <label for="day" class="field__label">Day</label>
     </div>
     <div class="form__field">
-      <p class="field__error">{ isMonthEmpty ? 'This field is required' : '' }</p>
-      <input type="number" id="month" name="month" class="field__month" min="1" step="1" placeholder="MM" on:input={handleInput('month')} on:keydown={handleKeypress(2)} />
+      <p class="field__error">{ submitted ? monthErrorMessage : '' }</p>
+      <input type="number" id="month" name="month" class={ submitted && (invalidDate || isMonthEmpty || !isValidMonth) ? 'field__month error' : 'field__month' }  min="1" step="1" placeholder="MM" on:input={handleInput('month')} on:keydown={handleKeypress(2)} />
       <label for="month" class="field__label">Month</label>
     </div>
     <div class="form__field">
-      <p class="field__error">{ isYearEmpty ? 'This field is required' : '' }</p>
-      <input type="number" id="year" name="year" class="field__year" min="1000" max="2023" step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} />
+      <p class="field__error">{ submitted ? yearErrorMessage : ''}</p>
+      <input type="number" id="year" name="year" class={ submitted && (invalidDate || isYearEmpty || !isValidYear) ? 'field__year error' : 'field__year' } min="1000" max="2023" step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} />
       <label for="year" class="field__label">Year</label>
     </div>
- </fieldset>
- <button type="submit" class="form__submit">
-   <img class="submit__icon" src={ArrowIcon} alt="arrow icon" />
- </button>
+  </fieldset>
+  <button type="submit" class="form__submit">
+    <img class="submit__icon" src={ArrowIcon} alt="arrow icon" />
+  </button>
 </form>
 
 <style>
@@ -144,19 +175,19 @@
     margin-top: 2px;
   }
 
-  .form__field input[type=number]::-webkit-inner-spin-button, 
-  .form__field input[type=number]::-webkit-outer-spin-button,
-  .form__field input[type=number] { 
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number] { 
     -webkit-appearance: none;
     appearance: textfield; 
     margin: 0;
   }
       
-  .form__field input[type=number]:invalid {
+  .error {
     border: 1px solid var(--light-red);
   }
 
-  .form__field input[type=number]:invalid + .field__label {
+  .error + .field__label {
     color: var(--light-red);
   }
 
@@ -170,10 +201,6 @@
     border-radius: 999px;
     background-color: var(--purple);
     cursor: pointer;
-  }
-
-  .form__submit:disabled {
-    cursor: not-allowed;
   }
 
   @media screen and (min-width: 1024px) {

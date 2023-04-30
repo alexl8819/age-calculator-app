@@ -43,7 +43,7 @@
     }
 
     .result__years > span, .result__months > span, .result__days > span {
-      letter-spacing: 0.2em;
+      letter-spacing: 0.05em;
     }
   }
 </style>

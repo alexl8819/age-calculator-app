@@ -1,45 +1,13 @@
 <script>
-  import dayjs from 'dayjs';
-  import customParseFormat from 'dayjs/plugin/customParseFormat';
-
   import AgeForm from './lib/AgeForm.svelte';  
   import AgeResult from './lib/AgeResult.svelte'; 
- 
-  dayjs.extend(customParseFormat);  
 
   const handleChange = ({ detail }) => {
-    let calculatedAge;
-    try {
-      calculatedAge = calculateAgeSince(`${detail.year}-${detail.month}-${detail.day}`);
-    } catch (err) {
-      console.log(err);
-      return;
-    }
-    years = calculatedAge.years;
-    months = calculatedAge.months;
-    days = calculatedAge.days;
+    years = detail.years;
+    months = detail.months;
+    days = detail.days;
   }
 
-  const calculateAgeSince = (date = '1984-09-24', since = dayjs()) => {
-    let pastDate = dayjs(date, 'YYYY-MM-DD', true);
-
-    if (!pastDate.isValid()) {
-      throw new Error('Failed strict date check: Date is invalid or format is wrong');
-    }
-
-    const yearsSince = since.diff(pastDate, 'years');
-    pastDate = pastDate.add(yearsSince, 'year');
-    const monthsSince = since.diff(pastDate, 'month');
-    pastDate = pastDate.add(monthsSince, 'month');
-    const daysSince = since.diff(pastDate, 'day');
-
-    return Object.freeze({
-      years: yearsSince,
-      months: monthsSince,
-      days: daysSince
-    });
-  }
-  
   let years;
   let months;
   let days;
