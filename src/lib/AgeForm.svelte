@@ -135,7 +135,8 @@
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding-bottom: 25px;
+    padding: 0;
+    padding-bottom: 15px;
     border: none;
   }
 
@@ -146,28 +147,29 @@
   }
 
   .field__label {
-    letter-spacing: 0.425em;
+    letter-spacing: 0.2em;
     font-size: 0.75rem;
     font-weight: 700;
     color: var(--smokey-grey);
     text-transform: uppercase;
     margin-bottom: 2px;
+    padding-left: -5px;
   }
 
   .field__day, .field__month, .field__year {
     appearance: textfield;
-    padding: 10px;
+    padding: 10px 13px;
     border: 1px solid var(--smokey-grey);
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
-    width: 70px;
+    width: 85px;
     outline: none;
   }
 
   .field__error {
     visibility: visible;
-    font-size: 0.5585rem;
+    font-size: 0.4585rem;
     font-weight: 400;
     color: var(--light-red);
     font-style: italic;
@@ -195,9 +197,8 @@
     display: flex;
     align-self: center;
     border: none;
-    width: 56px;
-    margin-top: -30px;
-    padding: 15px;
+    width: 64px;
+    padding: 20px;
     border-radius: 999px;
     background-color: var(--purple);
     cursor: pointer;
@@ -229,6 +230,7 @@
       align-self: end;
       width: 96px;
       padding: 25px;
+      margin-top: -30px;
     }
   }
 </style>

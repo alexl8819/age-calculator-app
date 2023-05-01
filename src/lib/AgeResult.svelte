@@ -33,7 +33,7 @@
   @media screen and (min-width: 1024px) {
     .results {
       margin-top: 0;
-      padding: 20px 28px;
+      padding: 50px 28px;
     }
     
     .result__years, .result__months, .result__days {
