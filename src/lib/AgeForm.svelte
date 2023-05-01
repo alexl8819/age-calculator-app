@@ -31,9 +31,9 @@
     }
   }
 
-  const submitDate = (e) => {
-    submitted = true;
+  const submitDate = () => {
     let calculatedAge;
+    submitted = true;
     try {
       calculatedAge = calculateAgeSince(`${year}-${month}-${day}`);
     } catch (err) {
@@ -54,6 +54,10 @@
 
     if (!pastDate.isValid()) {
       throw new Error('Failed strict date check: Date is invalid or format is wrong');
+    }
+
+    if (pastDate.isAfter(since)) {
+      throw new Error('Date cannot be later than todays date');
     }
 
     const yearsSince = since.diff(pastDate, 'years');
@@ -110,7 +114,7 @@
     </div>
     <div class="form__field">
       <p class="field__error">{ submitted ? yearErrorMessage : ''}</p>
-      <input type="number" id="year" name="year" class={ submitted && (invalidDate || isYearEmpty || !isValidYear) ? 'field__year error' : 'field__year' } min="1000" max="2023" step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} />
+      <input type="number" id="year" name="year" class={ submitted && (invalidDate || isYearEmpty || !isValidYear) ? 'field__year error' : 'field__year' } min="1000" max={currentYear} step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} />
       <label for="year" class="field__label">Year</label>
     </div>
   </fieldset>
