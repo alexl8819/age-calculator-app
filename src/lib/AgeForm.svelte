@@ -20,7 +20,7 @@
   }
 
   const handleChange = (field) => {
-    return ({ target }) => {
+    return () => {
       if (field === 'day') {
         day = day <= 9 ? String(day).padStart(2, '0') : day;
       } else if (field === 'month') {
