@@ -103,17 +103,17 @@
     <legend class="sr-only">Enter age date:</legend>
     <div class="form__field">
       <p class="field__error">{ submitted ? (dayErrorMessage || invalidErrorMessage) : '' }</p>
-      <input type="number" id="day" name="day" class={ submitted && (invalidDate || isDayEmpty || !isValidDay) ? 'field__day error' : 'field__day' } min="1" step="1" placeholder="DD" on:change={handleChange('day')} on:keydown={handleKeypress(2)} bind:value={day} />
+      <input type="number" id="day" name="day" class={ submitted && (invalidDate || isDayEmpty || !isValidDay) ? 'field__day input__error' : 'field__day' } min="1" step="1" placeholder="DD" on:change={handleChange('day')} on:keydown={handleKeypress(2)} bind:value={day} />
       <label for="day" class="field__label">Day</label>
     </div>
     <div class="form__field">
       <p class="field__error">{ submitted ? monthErrorMessage : '' }</p>
-      <input type="number" id="month" name="month" class={ submitted && (invalidDate || isMonthEmpty || !isValidMonth) ? 'field__month error' : 'field__month' } min="1" step="1" placeholder="MM" on:change={handleChange('month')} on:keydown={handleKeypress(2)} bind:value={month} />
+      <input type="number" id="month" name="month" class={ submitted && (invalidDate || isMonthEmpty || !isValidMonth) ? 'field__month input__error' : 'field__month' } min="1" step="1" placeholder="MM" on:change={handleChange('month')} on:keydown={handleKeypress(2)} bind:value={month} />
       <label for="month" class="field__label">Month</label>
     </div>
     <div class="form__field">
       <p class="field__error">{ submitted ? yearErrorMessage : ''}</p>
-      <input type="number" id="year" name="year" class={ submitted && (invalidDate || isYearEmpty || !isValidYear) ? 'field__year error' : 'field__year' } min="1000" max={currentYear} step="1" placeholder="YYYY" on:change={handleChange('year')} on:keydown={handleKeypress(4)} bind:value={year} />
+      <input type="number" id="year" name="year" class={ submitted && (invalidDate || isYearEmpty || !isValidYear) ? 'field__year input__error' : 'field__year' } min="1000" max={currentYear} step="1" placeholder="YYYY" on:change={handleChange('year')} on:keydown={handleKeypress(4)} bind:value={year} />
       <label for="year" class="field__label">Year</label>
     </div>
   </fieldset>
@@ -188,11 +188,11 @@
     margin: 0;
   }
       
-  .error {
+  .input__error {
     border: 1px solid var(--light-red);
   }
 
-  .error + .field__label {
+  .input__error + .field__label {
     color: var(--light-red);
   }
 
