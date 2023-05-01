@@ -164,7 +164,7 @@
   .field__day, .field__month, .field__year {
     appearance: textfield;
     padding: 10px 13px;
-    border: 1px solid var(--smokey-grey);
+    border: 1px solid var(--light-grey);
     border-radius: 5px;
     font-size: 18px;
     font-weight: 700;
