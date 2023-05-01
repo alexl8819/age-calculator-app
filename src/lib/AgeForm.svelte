@@ -202,6 +202,7 @@
     border: none;
     width: 64px;
     padding: 20px;
+    margin-top: -10px;
     border-radius: 999px;
     background-color: var(--purple);
     cursor: pointer;
