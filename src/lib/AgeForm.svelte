@@ -19,14 +19,12 @@
     }
   }
 
-  const handleInput = (field) => {
+  const handleChange = (field) => {
     return ({ target }) => {
-      if (field === 'year') {
-        year = target.value;
+      if (field === 'day') {
+        day = day <= 9 ? String(day).padStart(2, '0') : day;
       } else if (field === 'month') {
-        month = target.value;
-      } else if (field === 'day') {
-        day = target.value;
+        month = month <= 9 ? String(month).padStart(2, '0') : month;
       }
       invalidDate = false;
     }
@@ -78,19 +76,19 @@
 
   let year = '';
   
-  $: isYearEmpty = year.length === 0 || /\s+/g.test(year);
+  $: isYearEmpty = year && year.length === 0 || /\s+/g.test(year);
   $: isValidYear = parseInt(year) >= 1000 && parseInt(year) <= currentYear;
   $: yearErrorMessage = isYearEmpty ? 'This field is required' : (!isValidYear ? 'Must be a valid year' : '');
 
   let month = '';
 
-  $: isMonthEmpty = month.length === 0 || /\s+/g.test(month);
+  $: isMonthEmpty = month && month.length === 0 || /\s+/g.test(month);
   $: isValidMonth = parseInt(month) >= 1 && parseInt(month) <= 12;
   $: monthErrorMessage = isMonthEmpty ? 'This field is required' : (!isValidMonth ? 'Must be a valid month' : '');
 
   let day = '';
 
-  $: isDayEmpty = day.length === 0 || /\s+/g.test(day);
+  $: isDayEmpty = day && day.length === 0 || /\s+/g.test(day);
   $: isValidDay = parseInt(day) >= 1 && parseInt(day) <= 31;
   $: dayErrorMessage = isDayEmpty ? 'This field is required' : (!isValidDay ? 'Must be a valid day' : '');
 
@@ -105,17 +103,17 @@
     <legend class="sr-only">Enter age date:</legend>
     <div class="form__field">
       <p class="field__error">{ submitted ? (dayErrorMessage || invalidErrorMessage) : '' }</p>
-      <input type="number" id="day" name="day" class={ submitted && (invalidDate || isDayEmpty || !isValidDay) ? 'field__day error' : 'field__day' } min="1" step="1" placeholder="DD" on:input={handleInput('day')} on:keydown={handleKeypress(2)} />
+      <input type="number" id="day" name="day" class={ submitted && (invalidDate || isDayEmpty || !isValidDay) ? 'field__day error' : 'field__day' } min="1" step="1" placeholder="DD" on:change={handleChange('day')} on:keydown={handleKeypress(2)} bind:value={day} />
       <label for="day" class="field__label">Day</label>
     </div>
     <div class="form__field">
       <p class="field__error">{ submitted ? monthErrorMessage : '' }</p>
-      <input type="number" id="month" name="month" class={ submitted && (invalidDate || isMonthEmpty || !isValidMonth) ? 'field__month error' : 'field__month' }  min="1" step="1" placeholder="MM" on:input={handleInput('month')} on:keydown={handleKeypress(2)} />
+      <input type="number" id="month" name="month" class={ submitted && (invalidDate || isMonthEmpty || !isValidMonth) ? 'field__month error' : 'field__month' } min="1" step="1" placeholder="MM" on:change={handleChange('month')} on:keydown={handleKeypress(2)} bind:value={month} />
       <label for="month" class="field__label">Month</label>
     </div>
     <div class="form__field">
       <p class="field__error">{ submitted ? yearErrorMessage : ''}</p>
-      <input type="number" id="year" name="year" class={ submitted && (invalidDate || isYearEmpty || !isValidYear) ? 'field__year error' : 'field__year' } min="1000" max={currentYear} step="1" placeholder="YYYY" on:input={handleInput('year')} on:keydown={handleKeypress(4)} />
+      <input type="number" id="year" name="year" class={ submitted && (invalidDate || isYearEmpty || !isValidYear) ? 'field__year error' : 'field__year' } min="1000" max={currentYear} step="1" placeholder="YYYY" on:change={handleChange('year')} on:keydown={handleKeypress(4)} bind:value={year} />
       <label for="year" class="field__label">Year</label>
     </div>
   </fieldset>
@@ -153,11 +151,11 @@
 
   .field__label {
     letter-spacing: 0.2em;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 700;
     color: var(--smokey-grey);
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     padding-left: -5px;
   }
 
