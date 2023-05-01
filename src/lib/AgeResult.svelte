@@ -4,11 +4,11 @@
   export let days = '--';
 </script>
 
-<ul class="results">
+<ol class="results">
   <li class="result__years"><span>{ years }</span>years</li>
   <li class="result__months"><span>{ months }</span>months</li>
   <li class="result__days"><span>{ days }</span>days</li>
-</ul>
+</ol>
 
 <style>
   .results {
