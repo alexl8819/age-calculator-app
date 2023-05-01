@@ -4,16 +4,17 @@
   export let days = '--';
 </script>
 
-<div class="results">
-  <p class="result__years"><span>{ years }</span>years</p>
-  <p class="result__months"><span>{ months }</span>months</p>
-  <p class="result__days"><span>{ days }</span>days</p>
-</div>
+<ul class="results">
+  <li class="result__years"><span>{ years }</span>years</li>
+  <li class="result__months"><span>{ months }</span>months</li>
+  <li class="result__days"><span>{ days }</span>days</li>
+</ul>
 
 <style>
   .results {
     margin-top: 40px;
     padding: 10px 15px;
+    list-style: none;
   }
 
   .result__years, .result__months, .result__days {
