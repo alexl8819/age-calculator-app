@@ -18,6 +18,7 @@
     "vite": "^4.3.0"
   },
   "dependencies": {
+    "countup.js": "^2.6.1",
     "dayjs": "^1.11.7"
   }
 }

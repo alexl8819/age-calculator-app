@@ -28,6 +28,7 @@
       } else if (field === 'day') {
         day = target.value;
       }
+      invalidDate = false;
     }
   }
 

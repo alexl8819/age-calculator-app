@@ -2,12 +2,43 @@
   export let years = '--';
   export let months = '--';
   export let days = '--';
+
+  import { CountUp } from 'countup.js';
+  import { afterUpdate } from 'svelte';
+
+  let yearsEl;
+  let yearsCount;
+  let monthsEl;
+  let monthsCount;
+  let daysEl;
+  let daysCount;
+
+  afterUpdate(() => {
+    if (isNaN(years) || isNaN(months) || isNaN(days)) {
+      return;
+    }
+    if (!yearsCount) {
+      yearsCount = new CountUp(yearsEl, years);
+      yearsCount.start();
+    }
+    yearsCount.update(years);
+    if (!monthsCount) {
+      monthsCount = new CountUp(monthsEl, months);
+      monthsCount.start();
+    }
+    monthsCount.update(months);
+    if (!daysCount) {
+      daysCount = new CountUp(daysEl, days);
+      daysCount.start();
+    }
+    daysCount.update(days);
+  });
 </script>
 
 <ol class="results">
-  <li class="result__years">{ years }</li>
-  <li class="result__months">{ months }</li>
-  <li class="result__days">{ days }</li>
+  <li class="result__years" bind:this={yearsEl}>{years}</li>
+  <li class="result__months" bind:this={monthsEl}>{months}</li>
+  <li class="result__days" bind:this={daysEl}>{days}</li>
 </ol>
 
 <style>
