@@ -4,9 +4,13 @@
         "es2021": true
     },
     "extends": [
-        "plugin:svelte/recommended"
+        "eslint:recommended"
     ],
     "overrides": [
+      {
+        "files": ["*.svelte"],
+        "parser": "svelte-eslint-parser"
+      }
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
