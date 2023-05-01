@@ -174,7 +174,7 @@
 
   .field__error {
     visibility: visible;
-    font-size: 0.4585rem;
+    font-size: 0.6875rem;
     font-weight: 400;
     color: var(--light-red);
     font-style: italic;
