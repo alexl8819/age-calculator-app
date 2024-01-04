@@ -34,11 +34,12 @@ Users should be able to:
 
 ### Screenshot
 
-![Screenshot](./screenshot.png)
+![Mobile Screenshot](./screenshots/mobile.png)
+![Desktop Screenshot](./screenshots/desktop.png)
 
 ### Links
 
-- Live Site URL: [Age Calculator App](https://slightlyfunctional.gitlab.io/age-calculator-app/)
+- Live Site URL: [Age Calculator App](https://alexl8819.github.io/age-calculator-app/)
 
 ## My process
 
@@ -66,5 +67,4 @@ My current focus is to follow best practices and ensure code is readable, access
 
 ## Author
 
-- Website - [slightlyfunctional.com](https://slightlyfunctional.com)
-- Frontend Mentor - [@slightlyfunctional](https://www.frontendmentor.io/profile/slightlyfunctional)
+- Frontend Mentor - [@alexl8819](https://www.frontendmentor.io/profile/alexl8819)
