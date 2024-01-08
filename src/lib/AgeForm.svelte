@@ -1,6 +1,6 @@
 <script>
-  import * as dayjs from 'dayjs';
-  import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+  import dayjs from 'dayjs';
+  import customParseFormat from 'dayjs/plugin/customParseFormat';
   import { createEventDispatcher } from 'svelte';
 
   import ArrowIcon from '../assets/images/icon-arrow.svg';
