@@ -6,7 +6,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build --base=/age-calculator-app/",
     "preview": "vite preview",
     "lint": "eslint src/**/*.{js,svelte}",
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-env": "^7.23.7",
     "@fontsource/poppins": "^4.5.10",
     "@sveltejs/vite-plugin-svelte": "^2.0.3",
@@ -28,19 +29,21 @@
     "modern-css-reset": "^1.4.0",
     "svelte": "^3.57.0",
     "svelte-eslint-parser": "^0.27.0",
-    "svelte-jester": "^3.0.0",
+    "svelte-jester": "^2.3.2",
     "vite": "^4.3.0"
   },
   "dependencies": {
-    "countup.js": "^2.6.1",
+    "countup.js": "^2.5.0",
     "dayjs": "^1.11.7"
   },
   "jest": {
     "transform": {
-      "\\.[jt]sx?$": "babel-jest",
       "^.+\\.svelte": "svelte-jester",
       ".+\\.(css|styl|less|sass|scss|png|svg|jpg|ttf|woff|woff2)$": "jest-transform-stub"
     },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!countup\\.js)"
+    ],
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"

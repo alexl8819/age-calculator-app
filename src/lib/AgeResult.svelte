@@ -13,22 +13,26 @@
   let daysEl;
   let daysCount;
 
+  const options = {
+    duration: 1
+  };
+
   afterUpdate(() => {
     if (isNaN(years) || isNaN(months) || isNaN(days)) {
       return;
     }
     if (!yearsCount) {
-      yearsCount = new CountUp(yearsEl, years);
+      yearsCount = new CountUp(yearsEl, years, options);
       yearsCount.start();
     }
     yearsCount.update(years);
     if (!monthsCount) {
-      monthsCount = new CountUp(monthsEl, months);
+      monthsCount = new CountUp(monthsEl, months, options);
       monthsCount.start();
     }
     monthsCount.update(months);
     if (!daysCount) {
-      daysCount = new CountUp(daysEl, days);
+      daysCount = new CountUp(daysEl, days, options);
       daysCount.start();
     }
     daysCount.update(days);
@@ -36,12 +40,30 @@
 </script>
 
 <ol class="results">
-  <li class="result__years" bind:this={yearsEl}>{years}</li>
-  <li class="result__months" bind:this={monthsEl}>{months}</li>
-  <li class="result__days" bind:this={daysEl}>{days}</li>
+  <li class="result__years">
+    <div class="years__value" bind:this={yearsEl}>{years}</div> <span class="sr-only">years</span>
+  </li>
+  <li class="result__months">
+    <div class="months__value" bind:this={monthsEl}>{months}</div> <span class="sr-only">months</span>
+  </li>
+  <li class="result__days">
+    <div class="days__value" bind:this={daysEl}>{days}</div> <span class="sr-only">days</span>
+  </li>
 </ol>
 
 <style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
   .results {
     margin-top: 40px;
     padding: 10px 15px;
@@ -58,20 +80,20 @@
     margin-bottom: -15px;
   }
 
-  .result__years::after, .result__months::after, .result__days::after {
+  .years__value::after, .months__value::after, .days__value::after {
     color: var(--off-black);
     padding-left: 5px;
   }
 
-  .result__years::after {
+  .years__value::after {
     content: 'years';
   }
 
-  .result__months::after {
+  .months__value::after {
     content: 'months';  
   }
 
-  .result__days::after {
+  .days__value::after {
     content: 'days';
   }
   

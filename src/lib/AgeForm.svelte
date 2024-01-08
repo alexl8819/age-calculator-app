@@ -1,12 +1,11 @@
 <script>
-  import dayjs from 'dayjs';
-  import customParseFormat from 'dayjs/plugin/customParseFormat';
+  import * as dayjs from 'dayjs';
+  import * as customParseFormat from 'dayjs/plugin/customParseFormat';
   import { createEventDispatcher } from 'svelte';
 
   import ArrowIcon from '../assets/images/icon-arrow.svg';
   
   const dispatch = createEventDispatcher();
-  
   dayjs.extend(customParseFormat);
 
   const handleKeypress = (maxLength) => {
@@ -36,7 +35,6 @@
     try {
       calculatedAge = calculateAgeSince(`${year}-${month}-${day}`);
     } catch (err) {
-      console.log(err);
       invalidDate = true;
       return;
     }
@@ -117,7 +115,7 @@
       <label for="year" class="field__label">Year</label>
     </div>
   </fieldset>
-  <button type="submit" class="form__submit">
+  <button type="submit" class="form__submit" aria-label="calculate">
     <img class="submit__icon" src={ArrowIcon} alt="arrow icon" />
   </button>
 </form>
